@@ -7,7 +7,7 @@ source "$scriptpath"/.env
 set +o allexport
 
 # checking if any file already exists
-if [ ! "$(ls -A ./django/app/)" ]; then
+if [ -d "./django/app" ] || [ ! "$(ls -A ./django/app/ > /dev/null 2>&1)" ]; then
     # pull newest image
     docker pull "$django_image":"$django_tag"
 
