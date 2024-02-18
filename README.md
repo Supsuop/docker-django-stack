@@ -1,56 +1,55 @@
-# An easy to use docker django stack
+# Simple and User-Friendly Dockerized Django Stack
 
 ## Purpose
 
-The purpose of this docker stack is to provide a basic environment for django.
+This Docker stack aims to provide a foundational environment for Django development.
 
-## How to use it
+## How to Utilize
 
-Customize all .env files as you like.\
-The passwords are generated automatically and therefore do not need to be changed.
+Feel free to customize all `.env` files according to your preferences.\
+The passwords are automatically generated and thus require no manual changes.
 
-Start `init-project.sh`\
-This creates the necessary data for the project
+1. Run the `init-project.sh` script to set up essential project data:
 
-~~~bash
-./init-project.sh
-~~~
+   ```bash
+   ./init-project.sh
+   ```
 
-Start docker
+2. Launch Docker:
 
-~~~bash
-docker compse up
-~~~
+   ```bash
+   docker-compose up
+   ```
 
-## FAQ
+## Frequently Asked Questions
 
-### How exactly does the init-project.sh script work?
+### How does the `init-project.sh` script function?
 
-The script reads all necessary information from the .env files.
-Afterwards a python container is started, which then installs django.\
-This data is then stored in the folder `./django/app/`.
-If files are already stored in the folder, the script is not executed.
+The script extracts necessary information from the `.env` files.\
+Then, it initiates a Python container that installs Django.\
+The resulting data is stored in the `./django/app/` folder.\
+If files already exist in the folder, the script won't execute.
 
-### Is it possible to change the versions?
+### Can I modify the Python and Django versions?
 
-The python and django version can be customized via .env.
-This setting is only relevant during initialization.
+Yes, you can customize the Python and Django versions via the `.env` files.\
+These settings only apply during the initialization process.
 
-### Why are there already values for the passwords stored in the env?
+### Why are default values provided for the passwords in the env?
 
-Since they are overwritten during initialization, I left them as a dummy entry.
-The password for the database and the secret key for django are automatically generated with "openssl rand -hex 32".
+I've included placeholder values as they get overwritten during initialization.\
+The database password and Django's secret key are automatically generated using "openssl rand -hex 32".
 
-### Why do you use a healthcheck for the postgres container?
+### Why implement a health check for the Postgres container?
 
-I had to include a "healthcheck" because the depends_on function didn't work properly with the django container.
-As it seems, the image of postgres has no healthceck integrated.
+A "health check" was necessary since the `depends_on` function didn't work smoothly with the Django container.\
+Apparently, the Postgres image lacks an integrated health check.
 
-### Can I integrate my own environment into your docker template?
+### Can I integrate my own environment into your Docker template?
 
-Unfortunately I can't give an exact specification here, because every installation is different.\
-However, I can share some thoughts with you.
+Unfortunately, I can't provide an exact specification as each installation varies.\
+However, here are some considerations:
 
-1. the requirements.txt file should be overwritten
-2. use the correct python version
-3. check docker compose if the volumes match your installation
+1. Overwrite the `requirements.txt` file.
+2. Ensure the correct Python version is used.
+3. Verify the Docker Compose file to confirm that volumes align with your installation.
